@@ -2,13 +2,13 @@
 
 import { useState } from 'react';
 import { Store } from '@prisma/client';
+import { useParams, useRouter } from 'next/navigation';
 import {
   CheckIcon,
   ChevronsUpDown,
   PlusCircle,
   Store as StoreIcon,
 } from 'lucide-react';
-import { useParams, useRouter } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
 import { useStoreModal } from '@/hooks/use-store-modal';
