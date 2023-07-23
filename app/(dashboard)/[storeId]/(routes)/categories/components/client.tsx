@@ -6,15 +6,15 @@ import { useParams, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
-import { BannerColumn, columns } from './columns';
+import { CategoryColumn, columns } from './columns';
 import { DataTable } from '@/components/ui/data-table';
 import { ApiList } from '@/components/ui/api-list';
 
-interface BannerClientProps {
-  data: BannerColumn[];
+interface CategoryClientProps {
+  data: CategoryColumn[];
 }
 
-export const BannerClient: React.FC<BannerClientProps> = ({ data }) => {
+export const CategoryClient: React.FC<CategoryClientProps> = ({ data }) => {
   const router = useRouter();
   const params = useParams();
 
@@ -22,10 +22,12 @@ export const BannerClient: React.FC<BannerClientProps> = ({ data }) => {
     <>
       <div className='flex items-center justify-between'>
         <Heading
-          title={`Banners (${data.length})`}
-          description='Manage banners for your store'
+          title={`Categories (${data.length})`}
+          description='Manage categories for your store'
         />
-        <Button onClick={() => router.push(`/${params.storeId}/banners/new`)}>
+        <Button
+          onClick={() => router.push(`/${params.storeId}/categories/new`)}
+        >
           <Plus className='mr-2 h-4 w-4' />
           Add New
         </Button>
@@ -34,16 +36,16 @@ export const BannerClient: React.FC<BannerClientProps> = ({ data }) => {
       <DataTable
         columns={columns}
         data={data}
-        searchKey='label'
+        searchKey='name'
       />
       <Heading
         title='API'
-        description='API calls for Banners'
+        description='API calls for Categories'
       />
       <Separator />
       <ApiList
-        entityName='banners'
-        entityIdName='bannerId'
+        entityName='categories'
+        entityIdName='categoryId'
       />
     </>
   );
