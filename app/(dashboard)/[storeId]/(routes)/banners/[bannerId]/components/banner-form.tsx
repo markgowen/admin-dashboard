@@ -11,7 +11,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useParams, useRouter } from 'next/navigation';
 
 import { Input } from '@/components/ui/input';
-import { useOrigin } from '@/hooks/use-origin';
 import { Button } from '@/components/ui/button';
 import { Heading } from '@/components/ui/heading';
 import ImageUpload from '@/components/ui/image-upload';
@@ -43,7 +42,6 @@ export const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
 
   const params = useParams();
   const router = useRouter();
-  const origin = useOrigin();
 
   const title = initialData ? 'Edit Banner' : 'Create Banner';
   const description = initialData ? 'Edit a Banner' : 'Add a new Banner';
@@ -84,7 +82,7 @@ export const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
       setLoading(true);
       await axios.delete(`/api/${params.storeId}/banners/${params.bannerId}`);
       router.refresh();
-      router.push('/');
+      router.push(`/${params.storeId}/banners`);
       toast.success('Banner deleted.');
     } catch (error) {
       toast.error(
@@ -172,7 +170,6 @@ export const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
           </Button>
         </form>
       </Form>
-      <Separator />
     </>
   );
 };
